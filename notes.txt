@@ -1,0 +1,101 @@
+admin : anita
+pass :12345
+email :  anita@gmail.com
+
+# creating rider from api
+rider1
+12345
+
+
+
+
+
+
+front end part
+1 npm create vite@latest rider-frontend -- --template react
+2 select javascript and react compiler
+
+3 for running cd to app
+run npm run dev
+
+4 go to te frontend root , terminal -> npm install axios
+
+error : cors error
+step 1 pip install django-cors-headers
+step 2 add corsheaders inside installed apps in settings.py
+step 3 inside settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+
+
+#login feature
+
+1 pip install djangorestframework-simplejwt
+2 add 'rest_framework_simplejwt', in installed_Apps settings.py
+3 inside settings
+
+    from datetime import timedelta
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+
+4 create login api using SIMPLE_JWT
+
+5 to get a login button below register page and add multiple pages functionaity
+
+    npm install react-router-dom
+    used {useNavigate} for navigating to the url in react -> from react-router-dom
+    
+
+6 Now create another directory rides inside apps and then run startapp command
+python manage.py startapp rides apps/rides/
+
+7 go to apps.py and in settings to add the rides app  apps.rides
+8 Inside rides app open model and create DriverLocation model
+
+
+9 make django command to create random drivers near Bhopal
+
+    (geodjango starts)
+      1  use django.contrib.gis -> already comes in django pkg
+      install from network installer from -> https://trac.osgeo.org/osgeo4w/
+      search pkg -> libspatialite -> next
+      add C:\OSGeo4W64\bin to system path
+      check in cmd echo %PATH%
+
+      2  add in settings
+        "django.contrib.gis" to installed
+        inside database settings and spatial_lib path
+      3 NOTE: PYTHON 3.9 WORKS WITH GDAL 3.4 OR 3.5 
+
+      STEPS TO INSTALL CORRECT GDAL FOR PYTHON3.9
+      1 INSTALL MINICONDA installer
+      2 OPEN ANACONDA PROMPT
+      3 CREATE CONDA ENV
+        conda create -n django-gis python=3.9
+        conda activate django-gis
+        conda install -c conda-forge gdal=3.5
+        python -c "from osgeo import gdal; print(gdal.__version__)"
+        
+        cd to your django root and run code . 
+
+
+     (geodjango ends)
+    make a folder in any app called management-> commands -> file 
+    to run the file create_Drivers.py
+    be in the root and run 
+    python manage.py create_driver
+
+
+
